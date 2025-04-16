@@ -1,4 +1,10 @@
 {
+  "name": "operation-meraki-form",
+  "version": "1.0.0",
+  "main": "mergedServer.js",
+  "scripts": {
+    "start": "node mergedServer.js"
+  },
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
