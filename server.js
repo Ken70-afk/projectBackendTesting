@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 3000; // 🚨 Must use Railway's dynamic port
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static('public')); // or 'views' — wherever your HTML files are
+
 
 // PostgreSQL connection (shared pool for both forms)
 const pool = new Pool({

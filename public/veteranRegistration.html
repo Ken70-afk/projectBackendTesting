@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Veteran Registration Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 2rem;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    .header-image {
+  display: block;
+  margin: 0 auto 20px auto; /* auto left/right for centering */
+  width: 60%; /* adjust this percentage to control size */
+  max-width: 400px; /* optional: cap the maximum size */
+  height: auto;
+  border-radius: 8px; /* optional: adds slightly rounded corners */
+}
+
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+<!-- Banner Image -->
+<img src="thumbnail_image001.avif" alt="Operation Meraki Banner" class="header-image">
+
+
+    <h1>Veteran Registration</h1>
+    <form id="veteranForm">
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" required>
+
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="phone">Phone Number</label>
+      <input type="number" id="phone" name="phone" required>
+
+      <label for="veteran">Are you a Veteran?</label>
+      <select id="veteran" name="veteran" required>
+        <option value="">Select</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+
+      <label for="programInterest">Program Interest</label>
+      <input type="text" id="programInterest" name="programInterest" required>
+
+      <label for="serviceBranch">Service Branch</label>
+      <input type="text" id="serviceBranch" name="serviceBranch">
+
+      <label for="state">State</label>
+      <input type="text" id="state" name="state" required>
+
+      <label for="comment">Comment</label>
+      <textarea id="comment" name="comment" rows="4" placeholder="Your message..."></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('veteranForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = Object.fromEntries(new FormData(form).entries());
+      formData.veteran = formData.veteran === 'true'; // convert to boolean
+
+      try {
+        const res = await fetch('http://localhost:3000/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const msg = await res.text();
+        alert(msg);
+        if (res.ok) form.reset();
+      } catch (err) {
+        alert('Error submitting form. Try again.');
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
