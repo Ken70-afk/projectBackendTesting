@@ -1,13 +1,12 @@
 {
   "name": "operation-meraki-form",
   "version": "1.0.0",
-  "main": "volunteerServer.js",
+  "main": "server.js",
   "scripts": {
-    "start": "concurrently \"node volunteerServer.js\" \"node veteranRegistrationServer.js\""
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
-    "concurrently": "^8.2.2",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "pg": "^8.14.1"
